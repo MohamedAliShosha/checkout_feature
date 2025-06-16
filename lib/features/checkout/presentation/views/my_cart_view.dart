@@ -8,7 +8,12 @@ class MyCartView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        leading: const Icon(
+          Icons.arrow_back,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
         title: const Text(
           'My Cart',
           textAlign: TextAlign.center,
