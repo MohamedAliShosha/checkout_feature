@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paymentgateways_app/core/widgets/custom_app_bar.dart';
+import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/payment_details_view_body.dart';
 
 class PaymentDetails extends StatelessWidget {
   const PaymentDetails({super.key});
@@ -10,6 +11,7 @@ class PaymentDetails extends StatelessWidget {
       appBar: buildAppBar(
         title: 'Payment Details',
       ),
+      body: const PaymentDetailsViewBody(),
     );
   }
 }
