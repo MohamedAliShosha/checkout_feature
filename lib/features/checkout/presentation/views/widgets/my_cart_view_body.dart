@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:paymentgateways_app/core/widgets/custom_button.dart';
+import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/custom_divider.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/order_info_item.dart';
+import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/total_price.dart';
 
 class MyCartViewBody extends StatelessWidget {
   const MyCartViewBody({super.key});
@@ -34,6 +37,25 @@ class MyCartViewBody extends StatelessWidget {
           const OrderInfoItem(
             title: 'Shipping',
             value: '\$8',
+          ),
+          const CustomDivider(
+            thickness: 2,
+            height: 34,
+            color: Color(0xffC7C7C7),
+          ),
+          const SizedBox(
+            height: 3,
+          ),
+          const TotalPrice(
+            title: 'Total',
+            value: '\$50.97',
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          const CustomButton(),
+          const SizedBox(
+            height: 12,
           ),
         ],
       ),
