@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:paymentgateways_app/core/widgets/custom_button.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/custom_divider.dart';
-import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/order_info_item.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/total_price.dart';
-=======
+
 import 'package:paymentgateways_app/core/utils/styles.dart';
->>>>>>> dfc6faaee37c27db3340cb7090af93b830266670
 
 class MyCartViewBody extends StatelessWidget {
   const MyCartViewBody({super.key});
@@ -42,7 +39,6 @@ class MyCartViewBody extends StatelessWidget {
             title: 'Shipping',
             value: '\$8',
           ),
-<<<<<<< HEAD
           const CustomDivider(
             thickness: 2,
             height: 34,
@@ -62,9 +58,6 @@ class MyCartViewBody extends StatelessWidget {
           const SizedBox(
             height: 12,
           ),
-        ],
-      ),
-=======
         ],
       ),
     );
@@ -90,7 +83,6 @@ class OrderInfoItem extends StatelessWidget {
           style: Styles.style18,
         ),
       ],
->>>>>>> dfc6faaee37c27db3340cb7090af93b830266670
     );
   }
 }
