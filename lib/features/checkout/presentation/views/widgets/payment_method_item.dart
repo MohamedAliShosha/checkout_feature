@@ -4,18 +4,22 @@ import 'package:svg_flutter/svg.dart';
 class PaymentMethodItem extends StatelessWidget {
   const PaymentMethodItem({
     super.key,
+    required this.isActive,
   });
+
+  final bool isActive; // To check if the item is active or not
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 600),
       width: 103,
       height: 62,
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
-          side: const BorderSide(
+          side: BorderSide(
             width: 1.50,
-            color: Color(0xff34A853),
+            color: isActive ? const Color(0xff34A853) : Colors.grey,
           ),
           borderRadius: BorderRadius.circular(15),
         ),
