@@ -31,13 +31,13 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
             ),
             child: GestureDetector(
               onTap: () {
-                activeIndex = index;
+                activeIndex = index; // Update the active index
                 setState(() {});
               },
               child: PaymentMethodItem(
                 image: paymentMethodsItems[index],
                 isActive: activeIndex ==
-                    index, // Check if the current index is the active index
+                    index, // Check if the current index is equal to the active index
               ),
             ),
           );
