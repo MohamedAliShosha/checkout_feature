@@ -3,19 +3,31 @@ import 'package:paymentgateways_app/core/widgets/custom_button.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/custom_credit_card.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/payment_methods_list_view.dart';
 
-class PaymentDetailsViewBody extends StatelessWidget {
+class PaymentDetailsViewBody extends StatefulWidget {
   const PaymentDetailsViewBody({super.key});
 
   @override
+  State<PaymentDetailsViewBody> createState() => _PaymentDetailsViewBodyState();
+}
+
+class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  AutovalidateMode autoValidateMode =
+      AutovalidateMode.disabled; // To disable auto validation in the beginning
+
+  @override
   Widget build(BuildContext context) {
-    return const CustomScrollView(
+    return CustomScrollView(
       slivers: [
         // SliverToBoxAdapter enables me to use expanded widget
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: PaymentMethodsListView(),
         ),
         SliverToBoxAdapter(
-          child: CustomCreditCard(),
+          child: CustomCreditCard(
+            autovalidateMode: autoValidateMode,
+            formKey: formKey,
+          ),
         ),
         SliverFillRemaining(
           hasScrollBody:
@@ -25,12 +37,22 @@ class PaymentDetailsViewBody extends StatelessWidget {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                 right: 16,
                 left: 16,
                 bottom: 12,
               ),
-              child: CustomButton(),
+              child: CustomButton(
+                onTap: () {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
+                  } else {
+                    autoValidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+                title: 'Payment',
+              ),
             ),
           ),
         ),
