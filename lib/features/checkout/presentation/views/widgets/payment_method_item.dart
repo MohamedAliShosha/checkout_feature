@@ -5,9 +5,11 @@ class PaymentMethodItem extends StatelessWidget {
   const PaymentMethodItem({
     super.key,
     required this.isActive,
+    required this.image,
   });
 
   final bool isActive; // To check if the item is active or not
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +28,9 @@ class PaymentMethodItem extends StatelessWidget {
       ),
       child: Center(
         child: SvgPicture.asset(
-          'assets/images/card.svg',
-          height: 24,
+          image,
+          // fit: BoxFit
+          //     .scaleDown, // Make the image able to be smaller than its normal size but cannot be bigger than its normal size(Even that I change the size of the image, it will not be bigger than its normal size)
         ),
       ),
     );
