@@ -14,6 +14,12 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autoValidateMode =
       AutovalidateMode.disabled; // To disable auto validation in the beginning
+  /*
+  You are using autovalidateMode inside CustomCreditCard only as a medium
+  to pass it to CreditCardForm, 
+  which is actually the component responsible for validating the form fields.
+ 
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +51,7 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
               child: CustomButton(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
+                    formKey.currentState!.save(); //
                   } else {
                     autoValidateMode = AutovalidateMode.always;
                     setState(() {});
