@@ -54,10 +54,13 @@ class _PaymentDetailsViewBodyState extends State<PaymentDetailsViewBody> {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save(); //
                   } else {
-                    Navigator.of(context)
-                        .push(MaterialPageRoute(builder: (context) {
-                      return const ThankYouView();
-                    }));
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return const ThankYouView();
+                        },
+                      ),
+                    );
                     autoValidateMode = AutovalidateMode.always;
                     setState(() {});
                   }
