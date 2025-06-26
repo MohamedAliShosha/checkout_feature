@@ -20,6 +20,27 @@ class ThankYouViewBody extends StatelessWidget {
               ),
             ),
             Positioned(
+              bottom: MediaQuery.sizeOf(context).height * .2 +
+                  20, // bottom moves the circle up , 20 is the radius of the circle
+              left: 20 + 8,
+              right: 20 +
+                  8, // 20 is the radius of the circle and 16 is the padding of the container
+              child: Row(
+                children: List.generate(
+                  30,
+                  (index) => Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      child: Container(
+                        height: 2,
+                        color: const Color(0xffBBBBBB),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
               left:
                   -20, // having a negative value moves the circle to the outside direction from the left
               bottom: MediaQuery.sizeOf(context).height *
