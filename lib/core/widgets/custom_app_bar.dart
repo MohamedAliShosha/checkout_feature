@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paymentgateways_app/core/utils/styles.dart';
 
-AppBar buildAppBar({required final String title}) {
+AppBar buildAppBar({final String? title}) {
   return AppBar(
     leading: const Icon(
       Icons.arrow_back,
@@ -10,7 +10,7 @@ AppBar buildAppBar({required final String title}) {
     elevation: 0,
     backgroundColor: Colors.transparent,
     title: Text(
-      title,
+      title ?? '',
       textAlign: TextAlign.center,
       style: Styles.style25,
     ),
