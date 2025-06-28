@@ -16,3 +16,9 @@ class CheckoutApp extends StatelessWidget {
 void main() {
   runApp(const CheckoutApp());
 }
+
+
+// Steps to integrate Stripe:
+// 1. PaymentIntentObject Create a payment intent(amount , currency)
+// 2. Init payment sheet (paymentIntentClientSecret)
+// 3. Present payment sheet
