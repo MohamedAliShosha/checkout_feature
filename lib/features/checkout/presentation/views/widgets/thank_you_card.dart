@@ -93,9 +93,11 @@ class ThankYouCard extends StatelessWidget {
                     ),
                   ),
                   child: Center(
+                    // layout widget that centers its child within the available space of its parent
                     child: Text(
                       'PAID',
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign
+                          .center, // controls how the text is aligned within the Text widget's own width
                       style: Styles.style24.copyWith(
                         color: const Color(0xff34AB53),
                       ),
