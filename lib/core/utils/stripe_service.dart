@@ -1,3 +1,4 @@
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:paymentgateways_app/core/utils/api_keys.dart';
 import 'package:paymentgateways_app/core/utils/api_services.dart';
 import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_input_model.dart';
@@ -19,5 +20,14 @@ class StripeService {
 
     /* The post request returns response.data that I have assigned it to the response variable so I don't need to use response.data again here
     */
+  }
+
+  Future initPaymentSheet({required String paymentIntentClientSecret}) async {
+    Stripe.instance.initPaymentSheet(
+      paymentSheetParameters: SetupPaymentSheetParameters(
+        paymentIntentClientSecret: paymentIntentClientSecret,
+        merchantDisplayName: 'Mohamed',
+      ),
+    );
   }
 }
