@@ -8,14 +8,14 @@ class StripeService {
   final ApiService apiService =
       ApiService(); // Create an instance of ApiService
 
-  Future<PaymentIntentModel> createPaymentIntent(
+  Future<PaymentIntenParameterstModel> createPaymentIntent(
       PaymentIntentParametersModel paymentIntentParametersModel) async {
     var response = await apiService.post(
         body: paymentIntentParametersModel.convertParametersToJson(),
         url: 'https://api.stripe.com/v1/payment_intents',
         token: ApiKeys.secretKey);
 
-    var paymentIntentModel = PaymentIntentModel.fromJson(response);
+    var paymentIntentModel = PaymentIntenParameterstModel.fromJson(response);
     return paymentIntentModel;
 
     /* The post request returns response.data that I have assigned it to the response variable so I don't need to use response.data again here

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:paymentgateways_app/core/utils/api_keys.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/my_cart_view.dart';
 
 class CheckoutApp extends StatelessWidget {
@@ -14,6 +16,7 @@ class CheckoutApp extends StatelessWidget {
 }
 
 void main() {
+  Stripe.publishableKey = ApiKeys.publishableKey;
   runApp(const CheckoutApp());
 }
 
