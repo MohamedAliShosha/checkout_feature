@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:paymentgateways_app/core/widgets/custom_button.dart';
-import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_input_model.dart';
+import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_parameters_model.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/manager/cubit/payment_cubit.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/thank_you_view.dart';
 
@@ -23,6 +23,7 @@ class CustomBlocConsumerButton extends StatelessWidget {
           );
         }
         if (state is PaymentFailure) {
+          Navigator.of(context).pop();
           SnackBar snackBar = SnackBar(
             content: Text(state.errorMessage),
           );

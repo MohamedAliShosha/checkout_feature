@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:paymentgateways_app/core/errors/failures.dart';
-import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_input_model.dart';
+import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_parameters_model.dart';
 
 abstract class CheckoutRepo {
   Future<Either<Failures, void>> makePayment(

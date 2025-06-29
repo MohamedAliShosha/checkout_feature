@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_input_model.dart';
+import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_parameters_model.dart';
 import 'package:paymentgateways_app/features/checkout/data/repos/checkout_repo.dart';
 
 part 'payment_state.dart';
