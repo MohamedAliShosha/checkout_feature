@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
-class Api {
+class ApiService {
   final Dio _dio = Dio();
 
   // @required is an annotation that was used to indicate that a parameter must be provided when calling the function, even if it is nullable
