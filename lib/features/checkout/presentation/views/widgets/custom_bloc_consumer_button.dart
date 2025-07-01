@@ -4,6 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
 import 'package:paymentgateways_app/core/widgets/custom_button.dart';
+import 'package:paymentgateways_app/features/checkout/data/models/amount_model/amount_model.dart';
+import 'package:paymentgateways_app/features/checkout/data/models/amount_model/details.dart';
+import 'package:paymentgateways_app/features/checkout/data/models/item_list_model/item_list_model.dart';
+import 'package:paymentgateways_app/features/checkout/data/models/item_list_model/order_item_model.dart';
 import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_parameters_model.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/manager/cubit/payment_cubit.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/thank_you_view.dart';
@@ -47,6 +51,41 @@ class CustomBlocConsumerButton extends StatelessWidget {
             // BlocProvider.of<PaymentCubit>(context).makePayment(
             //   paymentIntentParametersModel: parametersModel,
             // );
+
+            /*
+            - first I created an amountModel then I gave values to its attributes
+            */
+            var amount = AmountModel(
+              total: '100',
+              currency: 'USD',
+              details: DetailsModel(
+                shipping: '0',
+                shippingDiscount: 0,
+                subtotal: '100',
+              ),
+            );
+            /*
+              - Second I Created a list of orders each one of them is an OrderItemModel
+            */
+            List<OrderItemModel> orders = [
+              OrderItemModel(
+                currency: 'USD',
+                name: 'Apple',
+                price: '4',
+                quantity: 10,
+              ),
+              OrderItemModel(
+                currency: 'USD',
+                name: 'Apple',
+                price: '5',
+                quantity: 12,
+              ),
+            ];
+            /*
+              - Third I created an ItemList of Type ItemListModel and this model holds all orders
+             */
+            var itemList = ItemListModel(orders: orders);
+
             Navigator.of(context).push(MaterialPageRoute(
               // PaypalCheckoutView is an InApp web view
               builder: (BuildContext context) => PaypalCheckoutView(
@@ -56,34 +95,11 @@ class CustomBlocConsumerButton extends StatelessWidget {
                 // Transaction is a list that contains a map
                 // These map has 3 keys "amount, currency and description"
                 // Each key has a value
-                transactions: const [
+                transactions: [
                   {
-                    "amount": {
-                      "total": "100",
-                      "currency": "USD",
-                      "details": {
-                        "subtotal": "100",
-                        "shipping": "0",
-                        "shipping_discount": 0
-                      }
-                    },
+                    "amount": amount.toJson(),
                     "description": "The payment transaction description.",
-                    "item_list": {
-                      "items": [
-                        {
-                          "name": "Apple",
-                          "quantity": 4,
-                          "price": '10',
-                          "currency": "USD"
-                        },
-                        {
-                          "name": "Pineapple",
-                          "quantity": 5,
-                          "price": '12',
-                          "currency": "USD"
-                        }
-                      ],
-                    }
+                    "item_list": itemList.toJson(),
                   }
                 ],
                 note: "Contact us for any questions on your order.",
