@@ -106,17 +106,18 @@ class CustomBlocConsumerButton extends StatelessWidget {
             - first I created an amountModel then I gave values to its attributes
             */
     var amount = AmountModel(
-      total: '100',
+      total: '100', // should equals (shipping + subtotal - shipping_discount)
       currency: 'USD',
       details: DetailsModel(
         shipping: '0',
-        shippingDiscount: 0,
+        shippingDiscount: 5, // Not a percentage just a number to be deducted 5$
         subtotal: '100',
       ),
     );
     /*
               - Second I Created a list of orders each one of them is an OrderItemModel
             */
+    // The items price Sum should equals the subtotal
     List<OrderItemModel> orders = [
       OrderItemModel(
         currency: 'USD',
