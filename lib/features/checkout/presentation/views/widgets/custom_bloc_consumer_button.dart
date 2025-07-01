@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
@@ -16,7 +15,10 @@ import 'package:paymentgateways_app/features/checkout/presentation/views/thank_y
 class CustomBlocConsumerButton extends StatelessWidget {
   const CustomBlocConsumerButton({
     super.key,
+    required this.isPayPal,
   });
+
+  final bool isPayPal;
 
   @override
   Widget build(BuildContext context) {
@@ -43,24 +45,29 @@ class CustomBlocConsumerButton extends StatelessWidget {
       builder: (context, state) {
         return CustomButton(
           onTap: () {
-            // PaymentIntentParametersModel parametersModel =
-            //     PaymentIntentParametersModel(
-            //   amount: "1000",
-            //   currency: 'USD',
-            //   customerId: 'cus_SargprQjNL40Bo',
-            // );
-            // BlocProvider.of<PaymentCubit>(context).makePayment(
-            //   paymentIntentParametersModel: parametersModel,
-            // );
+            if (isPayPal) {
+              var transactionsData = getTransactionData();
 
-            var transactionsData = getTransactionData();
-
-            executePayPalPayment(context, transactionsData);
+              executePayPalPayment(context, transactionsData);
+            } else {
+              executeStripePayment(context);
+            }
           },
           isLoading: state is PaymentLoading ? true : false,
           title: 'Continue',
         );
       },
+    );
+  }
+
+  void executeStripePayment(BuildContext context) {
+    PaymentIntentParametersModel parametersModel = PaymentIntentParametersModel(
+      amount: "1000",
+      currency: 'USD',
+      customerId: 'cus_SargprQjNL40Bo',
+    );
+    BlocProvider.of<PaymentCubit>(context).makePayment(
+      paymentIntentParametersModel: parametersModel,
     );
   }
 
@@ -86,7 +93,22 @@ class CustomBlocConsumerButton extends StatelessWidget {
           note: "Contact us for any questions on your order.",
           onSuccess: (Map params) async {
             log("onSuccess: $params");
-            Navigator.pop(context);
+            // Push to Thank you page and remove all
+            // other views from the stack so, If I try
+            // to go back, it will quit the app
+            Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ThankYouView(),
+              ),
+              (route) {
+                if (route.settings.name == '/') {
+                  return true; // Keep home view "Don't delete it" => '/' refers to home view
+                } else {
+                  return false; // Delete all other views
+                }
+              },
+            );
           },
           onError: (error) {
             log("onError: $error");
@@ -110,7 +132,7 @@ class CustomBlocConsumerButton extends StatelessWidget {
       currency: 'USD',
       details: DetailsModel(
         shipping: '0',
-        shippingDiscount: 5, // Not a percentage just a number to be deducted 5$
+        shippingDiscount: 0, // Not a percentage just a number to be deducted 5$
         subtotal: '100',
       ),
     );
