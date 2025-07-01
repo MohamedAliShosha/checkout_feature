@@ -28,7 +28,7 @@ void main() {
 
  Steps to attach a payment method to a customer:
  1. PaymentIntentModel create payment intent(amount, currency, customerId) => customer id can be is created while the user create an account then stored locally
- 2. keySecret create an ephemeral key (stripeVersion, customerId)
+ 2. keySecret create an ephemeral key (customerId)
  3. initPaymentSheet(merchantDisplayName, intentClientSecret, ephemeralKeySecret)
  4. present payment sheet()
 */

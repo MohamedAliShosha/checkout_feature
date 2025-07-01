@@ -29,21 +29,17 @@ class ApiService {
     required String url,
     String? contentType,
     required String? token, // token is required but tha value may be null
+    Map<String, String>? headers,
   }) async {
-    Map<String, String> headers = {};
-    if (token != null) {
-      headers['Authorization'] =
-          'Bearer $token'; // adding the token to the header
-      headers['Content-Type'] = contentType ??
-          'application/json'; // adding the content type to the header
-    }
     try {
       final response = await _dio.post(
         url,
+
         data: body, // passing the body that will be sent
         options: Options(
-            headers:
-                headers), // options holds the headers that contains "token and content type"
+          contentType: contentType,
+          headers: headers ?? {'Authorization': 'Bearer $token'},
+        ), // options holds the headers that contains "token and content type"
       );
       return response
           .data; // response.data contains only the actual data returned from the server (usually the JSON body or result you care about).

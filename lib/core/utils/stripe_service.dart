@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:paymentgateways_app/core/utils/api_keys.dart';
 import 'package:paymentgateways_app/core/utils/api_services.dart';
+import 'package:paymentgateways_app/features/checkout/data/models/ephemeral_key_model/ephemeral_key_model.dart';
 import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_parameters_model.dart';
 import 'package:paymentgateways_app/features/checkout/data/models/payment_intent_model/payment_intent_model.dart';
 
@@ -45,5 +46,26 @@ class StripeService {
     await initPaymentSheet(
         paymentIntentClientSecret: paymentIntentModel.clientSecret!);
     await displayPaymentSheet();
+  }
+
+  Future<EphemeralKeyModel> createEphemeralKey(
+      {required String customerId}) async {
+    var response = await apiService.post(
+        headers: {
+          'Authorization': 'Bearer $ApiKeys.secretKey',
+          'Stripe-Version': '2025-05-28.basil'
+        },
+        contentType: Headers.formUrlEncodedContentType,
+        body: {
+          'customer': customerId,
+        },
+        url: 'https://api.stripe.com/v1/payment_intents',
+        token: ApiKeys.secretKey);
+
+    var ephemeralKeyModel = EphemeralKeyModel.fromJson(response);
+    return ephemeralKeyModel;
+
+    /* The post request returns response.data that I have assigned it to the response variable so I don't need to use response.data again here
+    */
   }
 }
