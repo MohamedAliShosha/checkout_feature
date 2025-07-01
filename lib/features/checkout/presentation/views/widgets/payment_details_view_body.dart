@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:paymentgateways_app/core/widgets/custom_button.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/thank_you_view.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/custom_credit_card.dart';
-import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/payment_methods_list_view.dart';
 
 class PaymentDetailsViewBody extends StatefulWidget {
   const PaymentDetailsViewBody({super.key});
