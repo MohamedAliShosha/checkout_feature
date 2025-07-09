@@ -29,7 +29,8 @@ class ApiService {
     required String url,
     String? contentType,
     required String? token, // token is required but tha value may be null
-    Map<String, String>? headers,
+    Map<String, String>?
+        headers, // headers may change so I need to make a variable for it
   }) async {
     try {
       final response = await _dio.post(
@@ -38,7 +39,10 @@ class ApiService {
         data: body, // passing the body that will be sent
         options: Options(
           contentType: contentType,
-          headers: headers ?? {'Authorization': 'Bearer $token'},
+          headers: headers ??
+              {
+                'Authorization': 'Bearer $token'
+              }, // If I used a different headers it will be used here if not I will use the default one "{'Authorization': 'Bearer $token'}"
         ), // options holds the headers that contains "token and content type"
       );
       return response

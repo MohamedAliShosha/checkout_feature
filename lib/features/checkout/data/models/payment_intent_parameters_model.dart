@@ -1,7 +1,8 @@
 class PaymentIntentParametersModel {
   final String amount;
   final String currency;
-  final String customerId;
+  final String
+      customerId; // May be not required if the app accepts guests without creating an account
 
   PaymentIntentParametersModel(
       {required this.amount, required this.customerId, required this.currency});
