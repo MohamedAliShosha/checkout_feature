@@ -4,12 +4,13 @@ import 'package:paymentgateways_app/features/checkout/data/models/payment_intent
 import 'package:paymentgateways_app/features/checkout/presentation/manager/cubit/payment_cubit.dart';
 
 void executeStripePayment(BuildContext context) {
-  PaymentIntentParametersModel parametersModel = PaymentIntentParametersModel(
+  PaymentIntentParametersModel paymentIntentParametersModel =
+      PaymentIntentParametersModel(
     amount: "1000",
     currency: 'USD',
     customerId: 'cus_SargprQjNL40Bo',
   );
   BlocProvider.of<PaymentCubit>(context).makePayment(
-    paymentIntentParametersModel: parametersModel,
+    paymentIntentParametersModel: paymentIntentParametersModel,
   );
 }

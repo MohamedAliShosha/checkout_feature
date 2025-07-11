@@ -59,18 +59,28 @@ class StripeService {
   Future makePayment(
       {required PaymentIntentParametersModel
           paymentIntentParametersModel}) async {
+    // 1. Create a Payment Intent
     var paymentIntentModel = await createPaymentIntent(
         paymentIntentParametersModel); // The method returns a PaymentIntentModel that contains the payment intent
+
+    // 2. Create an Ephemeral Key.
     var ephemeralKeyModel = await createEphemeralKey(
         customerId: paymentIntentParametersModel.customerId);
+
+    // 3. Prepare the parameters for initializing the payment sheet
     var initPaymentSheetParameterModel = InitPaymentSheetParametersModel(
       ephemeralKeySecret: ephemeralKeyModel.secret!,
       paymentIntentClientSecret: paymentIntentModel
           .clientSecret!, // paymentIntentModel is the models parsed from the response of post request of stripe not a one I created
       customerId: paymentIntentParametersModel.customerId,
     );
+
+    // 4. Initializing payment sheet
     await initPaymentSheet(
-        initPaymentSheetParametersModel: initPaymentSheetParameterModel);
+      initPaymentSheetParametersModel: initPaymentSheetParameterModel,
+    );
+
+    // 5. Presenting payment sheet
     await displayPaymentSheet();
   }
 
