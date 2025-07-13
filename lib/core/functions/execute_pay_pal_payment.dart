@@ -17,7 +17,7 @@ void executePayPalPayment(BuildContext context,
       clientId: ApiKeys.payPalClientId,
       secretKey: ApiKeys.payPalSecretKey,
       // Transaction is a list that contains a map
-      // These map has 3 keys "amount, currency and description"
+      // This map has 3 keys "amount, item_list and description"
       // Each key has a value
       transactions: [
         {
