@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
+import 'package:paymentgateways_app/core/functions/custom_snack_bar.dart';
 import 'package:paymentgateways_app/core/utils/api_keys.dart';
 import 'package:paymentgateways_app/features/checkout/data/models/amount_model/amount_model.dart';
 import 'package:paymentgateways_app/features/checkout/data/models/item_list_model/item_list_model.dart';
@@ -29,16 +30,18 @@ void executePayPalPayment(BuildContext context,
       note: "Contact us for any questions on your order.",
       onSuccess: (Map params) async {
         log("onSuccess: $params");
-        // Push to Thank you page and remove all
-        // other views from the stack so, If I try
-        // to go back, it will quit the app
+        /* Push to Thank you page and remove all
+           other views from the stack so, If I try
+          to go back, it will quit the app
+        */
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const ThankYouView(),
           ),
           (route) {
-            if (route.settings.name == '/') {
+            if (route.settings.name == '/') // ('/') means the home view
+            {
               return true; // Keep home view "Don't delete it" => '/' refers to home view
             } else {
               return false; // Delete all other views
@@ -47,12 +50,7 @@ void executePayPalPayment(BuildContext context,
         );
       },
       onError: (error) {
-        SnackBar snackBar = SnackBar(
-          content: Text(error.toString()),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(
-          snackBar,
-        );
+        customSnackBar(error.toString(), context);
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(

@@ -1,7 +1,7 @@
 import 'order_item_model.dart';
 
 class ItemListModel {
-  List<OrderItemModel>? orders;
+  List<OrderItemModel>? orders; // first we need to create a list of <OrderItemModel>  then store them at ItemListModel 
 
   ItemListModel({this.orders});
 

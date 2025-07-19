@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:paymentgateways_app/features/checkout/presentation/views/widgets/payment_method_item.dart';
 
+// The StatefulWidget class
 class PaymentMethodsListView extends StatefulWidget {
   const PaymentMethodsListView({super.key, required this.updatePaymentMethod});
 
-  // second I created a function with the same clarification"تعريف" and took the same parameter
-  // of the function I created at PaymentMethodsBottomSheet
-  // So, this file "PaymentMethodsListView" function will be a reference to the function I created at PaymentMethodsBottomSheet
-  // and will be called from there.
-  final Function({required int index}) updatePaymentMethod;
+  /*
+    Step7: Creating a function with the same name "updatePaymentMethod"
+   */
+  final Function({required int index})
+      updatePaymentMethod; // This method is a reference for the updatePaymentMethod in Payment_Methods_Bottom_Sheet file "so it must have the same declaring with the same parameters" thats means calling updatePaymentMethod of this file will call updatePaymentMethod of Payment_Methods_Bottom_Sheet
 
   @override
   State<PaymentMethodsListView> createState() => _PaymentMethodsListViewState();
@@ -36,9 +37,11 @@ class _PaymentMethodsListViewState extends State<PaymentMethodsListView> {
               horizontal: 8,
             ),
             child: GestureDetector(
+              // This is the place that is responsible for changing paypal value too
               onTap: () {
                 activeIndex = index; // Update the active index
                 setState(() {});
+                // Step9: Calling the updatePaymentMethod function
                 widget.updatePaymentMethod(index: activeIndex);
               },
               child: PaymentMethodItem(

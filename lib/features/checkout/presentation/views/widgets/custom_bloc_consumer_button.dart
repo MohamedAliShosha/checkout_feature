@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:paymentgateways_app/core/functions/custom_snack_bar.dart';
 import 'package:paymentgateways_app/core/functions/execute_pay_pal_payment.dart';
 import 'package:paymentgateways_app/core/functions/execute_stripe_payment.dart';
 import 'package:paymentgateways_app/core/functions/get_transactions_data.dart';
@@ -13,7 +14,8 @@ class CustomBlocConsumerButton extends StatelessWidget {
     required this.isPayPal,
   });
 
-  final bool isPayPal;
+  final bool
+      isPayPal; // Step1: This bool indicates the payment method that will be used
 
   @override
   Widget build(BuildContext context) {
@@ -29,18 +31,14 @@ class CustomBlocConsumerButton extends StatelessWidget {
         }
         if (state is PaymentFailure) {
           Navigator.of(context).pop();
-          SnackBar snackBar = SnackBar(
-            content: Text(state.errorMessage),
-          );
-          ScaffoldMessenger.of(context).showSnackBar(
-            snackBar,
-          );
+          customSnackBar(state.errorMessage, context);
         }
       },
       builder: (context, state) {
         return CustomButton(
           onTap: () {
-            if (isPayPal) {
+            if (isPayPal) // Step2: check the selected method
+            {
               var transactionsData = getTransactionData();
 
               executePayPalPayment(context, transactionsData);
