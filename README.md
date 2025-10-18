@@ -56,8 +56,6 @@ A modular UI component for handling the full checkout experience in a Flutter e-
 🌐 Integration
 - Stripe / PayPal API (Test Mode Supported)
 
-📦 Dependencies
-- `flutter_credit_card` / `flutter_bloc` / `flutter_stripe` / `flutter_paypal_payment` / `dio` / `dartz` / `font_awesome_flutter` / `svg_flutter`
 
 ---
 
